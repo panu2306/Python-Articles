@@ -37,5 +37,24 @@ print(next(next(g))) # will print 16 why?
 ```
 Here, we have assigned a variable to function and used next() function to get the value in the iterator. The next() function is used to fetch next item from the collection.
 
-## Think about the fact:
-Let's dig at how range() function works. We know that range() function is used for iteration purpose. The range() function remembers the last number iterated and after iteration it continues from the next of that last number. This part of remembering is very important here and the idea this `remembering` is what is used in forming the generators. But, one more thing is we can't access elements in range() using next() function because it's a class of immutable iterable objects. For more information visit [here](https://stackoverflow.com/a/13092317/12552274).
+We are now at point to where we can use generators wherever we need. Let's see how can we use generator function to generate a fibbonacci series: 
+```
+def gen_fibbonacci(n):
+	a = 1
+	b = 1
+	for i in range(n):
+		yield(a)
+		a, b = b, a+b
+
+for num in gen_fibbonacci(10):
+	print(num)
+```
+
+This is how we can use generators in python for more memory efficient programs and also where we want to execute some code after returning the value. 
+
+
+## Fact about range() function:
+Let's dig at how range() function works. We know that range() function is used for iteration purpose. The range() function instad of producing a list in memory for all the values from start to stop it just remembers the last number iterated and after iteration it continues from the next of that last number. This part of remembering is very important here and the idea this `remembering` is what is used in forming the generators. But, one more thing is we can't access elements in range() using next() function because it's a class of immutable iterable objects. For more information visit [here](https://stackoverflow.com/a/13092317/12552274). Now, still if you want a iterator out of it, then use following to convert it into a list and the iterate over it: 
+```
+list(range(start, end))
+```
