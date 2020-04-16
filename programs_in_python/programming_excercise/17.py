@@ -16,5 +16,22 @@ Then, the output of the program should be:
 ABd1234@1
 
 '''
+import re 
 
+def check_password_validity(password):
+	passwords = [word for word in password.split(',')]
+	valid_passwords = []
 
+	for password in passwords:
+		if(6 <= len(password) <= 12):
+			if(re.search('[a-z]', password) and re.search('[0-9]', password) and re.search('[$#@]', password) and re.search('[A-Z]', password)):
+				valid_passwords.append(password)
+			else:
+				break
+		else:
+			break
+	
+	return valid_passwords
+
+print(''.join(check_password_validity('ABd1234@1,a F1#,2w3E*,2We3345')))	
+	
